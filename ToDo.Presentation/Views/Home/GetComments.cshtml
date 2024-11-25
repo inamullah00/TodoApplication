@@ -1,0 +1,32 @@
+﻿@model ToDo.Presentation.ViewModels.Item.ItemResponseViewModel
+
+@if (Model != null)
+{
+    <div class="container mt-4">
+        <h2>Comments for "@Model.Title"</h2>
+        <hr />
+
+        <ul class="list-group">
+            @if (Model.Comments != null && Model.Comments.Any())
+            {
+                foreach (var comment in Model.Comments)
+                {
+                    <li class="list-group-item">
+                        <strong>@comment.UserId:</strong> @comment.CommentText
+                        <span class="text-muted float-end">@comment.CreatedAt.ToString("MM/dd/yyyy HH:mm")</span>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item text-muted">No comments available.</li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="container mt-4">
+        <p class="text-danger">Unable to load the comments. Please try again later.</p>
+    </div>
+}
